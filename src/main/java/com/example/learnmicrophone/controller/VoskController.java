@@ -18,7 +18,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 
 @RestController
-@CrossOrigin(value = "http://localhost:5173/")
+@CrossOrigin(value = "*")
 public class VoskController {
 
     @Value("${vosk.model.path}")
