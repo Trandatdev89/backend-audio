@@ -39,29 +39,17 @@ public class VoskController {
     }
 
     @PostMapping("/audio-to-text")
-    public String convertAudioToText(@ModelAttribute AudioRequest audioRequest) throws UnsupportedAudioFileException {
+    public String convertAudioToText(@ModelAttribute AudioRequest audioRequest) throws UnsupportedAudioFileException, IOException, InterruptedException {
         var audioFile = audioRequest.audioFile();
 
         if (audioFile.isEmpty()) {
             return "{\"text\": \"No audio file uploaded.\"}";
         }
 
+        File tempInputFile = File.createTempFile("upload_", "_" + audioFile.getOriginalFilename());
+        audioFile.transferTo(tempInputFile);
 
-        // Save the file temporarily to check if it is received correctly
-        File tempFile;
-        try {
-            tempFile = new File("/home/rb091/Documents/learn-microphone/temp_" + audioFile.getOriginalFilename());
-            audioFile.transferTo(tempFile);
-        } catch (IOException e) {
-            return "{\"text\": \"Error saving audio file: " + e.getMessage() + "\"}";
-        }
-
-        File convertedFile;
-        try {
-            convertedFile = convertTo16kHzWav(tempFile);
-        } catch (IOException | InterruptedException e) {
-            return "{\"text\": \"Error converting audio file: " + e.getMessage() + "\"}";
-        }
+        File convertedFile = convertTo16kHzWav(tempInputFile);
 
         // Convert audio to text using Vosk
         String transcription = transcribeAudio(convertedFile);

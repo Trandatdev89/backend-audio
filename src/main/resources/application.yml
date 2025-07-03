@@ -13,3 +13,7 @@ vosk:
   model:
     path: src/main/resources/vosk-model-small-ja-0.22
 
+storage:
+  dir:
+    temp: src/main/resources/temp
+
