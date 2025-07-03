@@ -1,0 +1,8 @@
+spring:
+  config:
+    activate:
+      on-profile: english
+
+vosk:
+  model:
+    path: src/main/resources/vosk-model-small-en-us-0.15

@@ -1,0 +1,15 @@
+spring:
+  application:
+   name: learn-microphone
+  servlet:
+   multipart:
+     max-file-size: 20MB
+     max-request-size: 20MB
+  profiles:
+    active: english
+
+
+vosk:
+  model:
+    path: src/main/resources/vosk-model-small-ja-0.22
+
