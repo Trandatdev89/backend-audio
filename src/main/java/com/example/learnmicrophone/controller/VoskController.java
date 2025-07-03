@@ -18,7 +18,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 
 @RestController
-@CrossOrigin(value = "*")
+@CrossOrigin(value = "http://localhost:5173/")
 public class VoskController {
 
     @Value("${vosk.model.path}")
@@ -50,9 +50,8 @@ public class VoskController {
         // Save the file temporarily to check if it is received correctly
         File tempFile;
         try {
-            tempFile = new File("temp_" + audioFile.getOriginalFilename());
+            tempFile = new File("/home/rb091/Documents/learn-microphone/temp_" + audioFile.getOriginalFilename());
             audioFile.transferTo(tempFile);
-            System.out.println("Audio file saved to: " + tempFile.getAbsolutePath());
         } catch (IOException e) {
             return "{\"text\": \"Error saving audio file: " + e.getMessage() + "\"}";
         }
