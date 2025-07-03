@@ -20,7 +20,7 @@ public class DeepgramService {
 
     public DeepgramService() {
         this.webClient = WebClient.builder()
-                .baseUrl("https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true")
+                .baseUrl("https://api.deepgram.com/v1/listen?language=ja&tier=enhanced&version=beta&model=general")
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Token " + API_KEY)
                 .build();
     }
